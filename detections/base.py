@@ -117,7 +117,8 @@ class DetectionEvaluator:
 
         success_adv_seq = [False] * len(X_leg_all)
         for i, Y_adv_pred in enumerate(Y_adv_pred_list):
-            attack_name = attack_names[i]
+            print('=====Attack Names===', list(attack_names), i)
+            attack_name = list(attack_names)[i]
             if 'targeted=ll' in attack_name:
                 success_adv_seq_attack = list(np.argmax(Y_adv_pred, axis=1) == np.argmax(Y_test_target_ll, axis=1))
             elif 'targeted=next' in attack_name:
