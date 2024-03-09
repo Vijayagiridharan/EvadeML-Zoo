@@ -77,7 +77,7 @@ class FeatureSqueezingDetector:
         squeezers_name = params['squeezers'].split(',')
         self.set_config(layer_id, normalizer, metric, squeezers_name)
 
-        if params.has_key('threshold'):
+        if 'threshold' in params:
             self.threshold = float(params['threshold'])
         else:
             self.threshold = None
