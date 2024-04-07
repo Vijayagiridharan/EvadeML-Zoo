@@ -35,7 +35,16 @@ tgt_folder = os.path.join(os.path.dirname(src_folder), tgt_folder)
 if not os.path.isdir(tgt_folder):
     os.makedirs(tgt_folder)
 
-for i in range(1, 50001):
+for i,lab in zip(range(1, 50001),list(labels)):
+
     src_fname = "ILSVRC2012_val_%08d.JPEG" % i
-    tgt_fname = "%d.%d.JPEG" % (labels[i-1], i)
-    os.symlink(os.path.abspath(os.path.join(src_folder, src_fname)), os.path.join(tgt_folder, tgt_fname))
+    tgt_fname = "%d.%d.JPEG" % (lab, i)
+    src_path = os.path.abspath(os.path.join(src_folder, src_fname))
+    tgt_path = os.path.join(tgt_folder, tgt_fname)
+
+    # Check if the target file already exists
+    if not os.path.exists(tgt_path):
+        os.symlink(src_path, tgt_path)
+    else:
+        # If the file exists, print a message. Alternatively, you can handle it differently.
+        print(f"Target file already exists, skipping: {tgt_fname}")
