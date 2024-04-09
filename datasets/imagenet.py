@@ -42,8 +42,20 @@ def data_imagenet(img_folder, img_size, label_style = 'caffe', label_size = 1000
     labels = map(lambda x: int(x.split('.')[0]), selected_fnames)
     img_path_list = map(lambda x: [os.path.join(img_folder, x), img_size], selected_fnames)
     X = map(_load_single_image, img_path_list)
+
+    X = list(X)
+    X = np.array(X)
     X = np.concatenate(X, axis=0)
-    Y = np.eye(1000)[labels]
+    
+    labels = list(labels)
+    print('==labels==',labels)
+    print('==labels len==',len(labels))
+
+    Y = np.zeros((len(labels), 1000))
+
+    # Set the appropriate elements to 1
+    Y[np.arange(len(labels)), labels] = 1
+
     return X, Y
 
 

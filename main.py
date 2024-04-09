@@ -118,10 +118,13 @@ def main(argv=None):
             if not FLAGS.balance_sampling:
                 selected_idx = correct_idx[:FLAGS.nb_examples]
             else:
+                print('Here 3')
                 # select the same number of examples for each class label.
-                nb_examples_per_class = int(FLAGS.nb_examples / Y_test_all.shape[1])
+                #nb_examples_per_class = int(FLAGS.nb_examples / Y_test_all.shape[1])
+                nb_examples_per_class = FLAGS.nb_examples
                 correct_and_selected_idx = get_first_n_examples_id_each_class(Y_test_all[correct_idx], n=nb_examples_per_class)
                 selected_idx = [ correct_idx[i] for i in correct_and_selected_idx ]
+
     else:
         selected_idx = np.array(range(FLAGS.nb_examples))
 
