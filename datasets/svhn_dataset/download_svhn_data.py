@@ -1,4 +1,4 @@
-import urllib.request import urlopen
+from urllib.request import urlopen
 import os, sys
 
 sys.path.append(os.path.dirname(os.path.dirname(os.path.abspath(__file__))))
