@@ -29,7 +29,7 @@ def _load_single_image(args):
 
 
 def data_imagenet(img_folder, img_size, label_style = 'caffe', label_size = 1000, selected_idx = None):
-    fnames = os.listdir(img_folder)
+    fnames = os.listdir(img_folder)[1000]
     fnames = sorted(fnames, key = lambda x: int(x.split('.')[1]))
     
     if isinstance(selected_idx, list):
@@ -46,7 +46,7 @@ def data_imagenet(img_folder, img_size, label_style = 'caffe', label_size = 1000
     X = list(X)
     X = np.array(X)
     X = np.concatenate(X, axis=0)
-    
+
     labels = list(labels)
     print('==labels==',labels)
     print('==labels len==',len(labels))
