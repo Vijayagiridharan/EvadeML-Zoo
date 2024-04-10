@@ -53,6 +53,7 @@ def load_tf_session():
 def main(argv=None):
     # 0. Select a dataset.
     from datasets import MNISTDataset, CIFAR10Dataset, ImageNetDataset
+    from datasets.svhn import SVHNDataset
     from datasets import get_correct_prediction_idx, evaluate_adversarial_examples, calculate_mean_confidence, calculate_accuracy
 
     if FLAGS.dataset_name == "MNIST":
