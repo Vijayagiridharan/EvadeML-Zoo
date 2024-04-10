@@ -1,4 +1,4 @@
-import urllib2
+import urllib.request import urlopen
 import os, sys
 
 sys.path.append(os.path.dirname(os.path.dirname(os.path.abspath(__file__))))
@@ -10,6 +10,6 @@ addr = ['http://ufldl.stanford.edu/housenumbers/test_32x32.mat','http://ufldl.st
 for i in range(2):
 	f = os.path.join('datasets/svhn_dataset',filename[i])
 	if not os.path.exists(f):
-		output = open(f,'w')
-		output.write(urllib2.urlopen(addr[i]).read())
+		output = open(f,'wb')
+		output.write(urlopen(addr[i]).read())
 		output.close()
