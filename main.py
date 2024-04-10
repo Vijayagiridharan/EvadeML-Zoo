@@ -276,11 +276,14 @@ def main(argv=None):
             selected_idx_vis = range(Y_test.shape[1])
         else:
             selected_idx_vis = get_first_n_examples_id_each_class(Y_test, 1)
-
-        legitimate_examples = X_test[selected_idx_vis]
+            
+        #legitimate_examples = X_test[selected_idx_vis]
+        legitimate_examples = np.array([X_test[idx] for idx in selected_idx_vis if idx in range(len(X_test))])
 
         rows = [legitimate_examples]
-        rows += map(lambda x:x[selected_idx_vis], X_test_adv_list)
+        #rows += map(lambda x:x[selected_idx_vis], X_test_adv_list)
+        rows += [[x[idx] for idx in selected_idx_vis if idx < len(x)] for x in X_test_adv_list]
+
 
         img_fpath = os.path.join(FLAGS.result_folder, '%s_attacks_%s_examples.png' % (task_id, attack_string_hash) )
         show_imgs_in_rows(rows, img_fpath)
