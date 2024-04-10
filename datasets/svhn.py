@@ -60,18 +60,20 @@ class SVHNDataset:
   def load_model_by_name(self, model_name, logits=False, input_range_type=1, pre_filter=lambda x:x):
 
     if model_name not in ['tohinz']:
-      raise NotImplementedError("Undefined model [%s] for %s." % (model_name, self.dataset_name))
-      self.model_name = model_name
+        raise NotImplementedError("Undefined model [%s] for %s." % (model_name, self.dataset_name))
+    
+    self.model_name = model_name
 
-      model_weights_fpath = "%s_%s.keras_weights.h5" % (self.dataset_name, model_name)
-      model_weights_fpath = os.path.join('downloads/trained_models', model_weights_fpath)
+    model_weights_fpath = "%s_%s.keras_weights.h5" % (self.dataset_name, model_name)
+    model_weights_fpath = os.path.join('downloads/trained_models', model_weights_fpath)
 
-      if model_name in ["tohinz"]:
-              model = tohinz_svhn_model(logits=logits, input_range_type=input_range_type, pre_filter=pre_filter)
-      print("\n===Defined TensorFlow model graph.")
-      model.load_weights(model_weights_fpath)
-      print ("---Loaded SVHN-%s model.\n" % model_name)
-      return model
+    if model_name in ["tohinz"]:
+        model = tohinz_svhn_model(logits=logits, input_range_type=input_range_type, pre_filter=pre_filter)
+        print("\n===Defined TensorFlow model graph.")
+        model.load_weights(model_weights_fpath)
+        print ("---Loaded SVHN-%s model.\n" % model_name)
+    return model
+
 
 if __name__ == '__main__':
     # from datasets.mnist import *
