@@ -132,6 +132,11 @@ def main(argv=None):
     selected_example_idx_ranges = format_number_range(sorted(selected_idx))
     print ( "Selected %d examples." % len(selected_idx))
     print ( "Selected index in test set (sorted): %s" % selected_example_idx_ranges )
+
+    X_test_all = np.array(X_test_all)
+    Y_test_all = np.array(Y_test_all)
+    Y_pred_all = np.array(Y_pred_all)
+
     X_test, Y_test, Y_pred = X_test_all[selected_idx], Y_test_all[selected_idx], Y_pred_all[selected_idx]
 
     # The accuracy should be 100%.
