@@ -32,6 +32,8 @@ def data_imagenet(img_folder, img_size, label_style = 'caffe', label_size = 1000
     fnames = os.listdir(img_folder)[1000]
     fnames = sorted(fnames, key = lambda x: int(x.split('.')[1]))
     
+    fnames = fnames[:1000] # change the number of images here
+
     if isinstance(selected_idx, list):
         selected_fnames = [fnames[i] for i in selected_idx]
     elif isinstance(selected_idx, int):
