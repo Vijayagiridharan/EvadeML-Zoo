@@ -28,11 +28,11 @@ def _load_single_image(args):
     return load_single_image(img_path, img_size)
 
 
-def data_imagenet(img_folder, img_size, label_style = 'caffe', label_size = 1000, selected_idx = None):
-    fnames = os.listdir(img_folder)[1000]
-    fnames = sorted(fnames, key = lambda x: int(x.split('.')[1]))
+def data_imagenet(img_folder, img_size, label_style='caffe', label_size=1000, selected_idx=None):
+    fnames = os.listdir(img_folder)
+    fnames = sorted(fnames, key=lambda x: int(x.split('.')[1]))
     
-    fnames = fnames[:1000] # change the number of images here
+    fnames = fnames[:250]  # Change the number of images here
 
     if isinstance(selected_idx, list):
         selected_fnames = [fnames[i] for i in selected_idx]
@@ -41,7 +41,7 @@ def data_imagenet(img_folder, img_size, label_style = 'caffe', label_size = 1000
     else:
         selected_fnames = fnames
 
-    labels = map(lambda x: int(x.split('.')[0]), selected_fnames)
+    labels = list(map(lambda x: int(x.split('.')[0]), selected_fnames))
     img_path_list = map(lambda x: [os.path.join(img_folder, x), img_size], selected_fnames)
     X = map(_load_single_image, img_path_list)
 
@@ -50,8 +50,8 @@ def data_imagenet(img_folder, img_size, label_style = 'caffe', label_size = 1000
     X = np.concatenate(X, axis=0)
 
     labels = list(labels)
-    print('==labels==',labels)
-    print('==labels len==',len(labels))
+    print('==labels==', labels)
+    print('==labels len==', len(labels))
 
     Y = np.zeros((len(labels), 1000))
 
