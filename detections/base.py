@@ -306,14 +306,16 @@ class DetectionEvaluator:
 
             roc_auc = auc(fprs, tprs)
             print ("Overall TPR: %f\tROC-AUC: %f" % (tpr, roc_auc))
-
+        
             # FAEs
-            if FLAGS.detection_train_test_mode:
-                X_fae, Y_fae = self.get_fae_testing_data()
-            else:
-                X_fae, Y_fae = self.get_fae_data()
-            Y_test_pred, Y_test_pred_score = detector.test(X_fae)
-            _, tpr, _, tp, ap = evalulate_detection_test(Y_fae, Y_test_pred)
-            print ("Overall detection rate on FAEs: %.4f \t %3d/%3d" % (tpr, tp, ap))
-
+            try:
+                if FLAGS.detection_train_test_mode:
+                    X_fae, Y_fae = self.get_fae_testing_data()
+                else:
+                    X_fae, Y_fae = self.get_fae_data()
+                Y_test_pred, Y_test_pred_score = detector.test(X_fae)
+                _, tpr, _, tp, ap = evalulate_detection_test(Y_fae, Y_test_pred)
+                print ("Overall detection rate on FAEs: %.4f \t %3d/%3d" % (tpr, tp, ap))
+            except:
+                print("No FA images found")
         write_to_csv(to_csv, csv_fpath, fieldnames)
